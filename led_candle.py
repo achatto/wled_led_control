@@ -16,9 +16,9 @@ phase = np.arange(2*np.pi, 0, -2*np.pi/8)
 dt = 0.1
 freq = 0.5
 min_amp = 0.0
-r = [220, 220, 220, 220, 220, 220, 200, 200]
-g = [50, 75, 100, 100, 100, 100, 50, 50]
-b = [0, 0, 0, 0, 0, 0, 100, 100]
+r = [220, 220, 220, 220, 220, 220, 220, 220]
+g = [50, 75, 100, 100, 100, 100, 100, 100]
+b = [0, 0, 0, 0, 0, 0, 0, 0]
 
 ww = [100, 100, 100, 100, 100, 100, 150, 150]
 
@@ -51,7 +51,7 @@ while 1:
     counter = (counter + 1)%100000 
     t = dt*counter
     #t = time.monotonic()-start
-    print(t)
+    #print(t)
     for i in range(0,int(60/8)+1):
         bri = int(255*(min_amp+(1-min_amp)*(1+np.sin(2*np.pi*t*freq+phase[i]))/2))
         seg[i] = {'id': i, 'start': i*8, 'stop': int(np.clip((i+1)*8, 0, 60)), 'bri': bri}
