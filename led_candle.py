@@ -45,12 +45,12 @@ if not a:
     print("Unsuccessful setting initial state /n")
 time.sleep(dt)
 
-start = time.monotonic()
-#counter = 0
+#start = time.monotonic()
+counter = 0
 while 1:
-    #counter = (counter + 1)%100000 
-   # t = dt*counter
-    t = time.monotonic()-start
+    counter = (counter + 1)%100000 
+    t = dt*counter
+    #t = time.monotonic()-start
     print(t)
     for i in range(0,int(60/8)+1):
         bri = int(255*(min_amp+(1-min_amp)*(1+np.sin(2*np.pi*t*freq+phase[i]))/2))
