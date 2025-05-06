@@ -11,10 +11,10 @@ def set_state(host, state):
 host = "192.168.178.124"
 
 phase = np.arange(0, 2*np.pi, 2*np.pi/8)
-#phase = [0 for i in range(8)]
 #np.random.shuffle(phase)
-freq = 1
-min_amp = 0.10
+
+freq = 0.5
+min_amp = 0.0
 r = [255, 255, 200, 200, 200, 200, 200, 200]
 g = [50, 100, 100, 100, 100, 100, 100, 50]
 b = [0, 0, 0, 0, 0, 00, 150, 150]
@@ -30,7 +30,7 @@ for i in range(0,int(60/8)+1):
 ## Set LED ON
 for i in range(5):
     a = set_state(host, {"on": True})
-    time.sleep(0.1)
+    time.sleep(0.05)
     if a == True:
         break
     elif i == 5:
@@ -42,7 +42,7 @@ data = {"seg": seg}
 a = set_state(host, data)
 if not a:
     print("Unsuccessful setting initial state /n")
-time.sleep(0.1)
+time.sleep(0.05)
 
 #start = time.monotonic()
 counter = 0
@@ -52,15 +52,12 @@ while 1:
 #    t = time.monotonic()-start
     for i in range(0,int(60/8)+1):
         bri = int(255*(min_amp+(1-min_amp)*(1+np.sin(2*np.pi*t*freq+phase[i]))/2))
-        #print(((1-min_amp)*(1+np.sin(2*np.pi*t*freq+phase[i]))/2))
-        print(bri)
-        #bri = 100
         seg[i] = {'id': i, 'start': i*8, 'stop': int(np.clip((i+1)*8, 0, 60)), 'bri': bri}
     data = {"seg": seg}
     a = set_state(host, data)
     if not a:
         print("Unsuccessful setting state /n")
-    time.sleep(0.1)
+    time.sleep(0.05)
 
 
 
