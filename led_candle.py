@@ -14,7 +14,7 @@ phase = np.arange(2*np.pi, 0, -2*np.pi/8)
 #np.random.shuffle(phase)
 
 dt = 0.1
-freq = 0.5
+freq = 1
 min_amp = 0.0
 r = [220, 220, 220, 220, 220, 220, 220, 220]
 g = [50, 75, 100, 100, 100, 100, 100, 100]
