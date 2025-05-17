@@ -16,25 +16,26 @@ def set_state(host, state):
 ### Parameters
 
 # Time params
-dt = 0.1
+dt = 0.05
 
 #number of LED segments
 n_seg = 8
 
 # RGB INIT
-g_channel = 0
-b_channel = 1
-r_channel = 2
+g_channel = 1
+b_channel = 2
+r_channel = 0
 col = np.zeros(3)
 
 # Volume min max
-min = 0.5
-max = 75
+min = 0
+max = 20
 
 ### PyAudio INIT:
 
-CHUNK = 2000 # Samples: 1024,  512, 256, 128
-RATE = 40000  # Sampling rate
+
+RATE = 44100  # Sampling rate
+CHUNK = int(dt*RATE) # Samples: 1024,  512, 256, 128
 
 paud = pyaudio.PyAudio()
 
@@ -90,7 +91,9 @@ while not done:
     waveform = np.frombuffer(buffer, dtype=np.int16)
     #print(np.mean(waveform**2))
     volume = sqrt(abs(np.mean(waveform**2)))
+    print(volume)
     volume = (np.clip(volume, min, max)-min)/(max-min)
+    
 
     #map color values
     col[0] = volume
@@ -103,7 +106,7 @@ while not done:
         col[1] = 0
     col = col*255
 
-    color =  [[col[0], col[1], col[2], 100],[0,0,0,0],[0,0,0,0]]
+    color =  [[col[r_channel], col[g_channel], col[b_channel], 0],[0,0,0,0],[0,0,0,0]]
     #print(color)
 
     #map number of active led segments
