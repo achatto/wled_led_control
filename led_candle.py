@@ -23,7 +23,6 @@ b = [0, 0, 0, 0, 0, 0, 0, 0]
 ww = [100, 100, 100, 100, 100, 100, 150, 150]
 
 # define segments
-seg_start_stop = [[0 for i in range(2)] for j in range(int(60/8+1))]
 seg = [0 for j in range(int(60/8+1))]
 for i in range(0,int(60/8)+1):
     seg[i] = {'id': i, 'start': i*8, 'stop': int(np.clip((i+1)*8, 0, 60)), 'col': [[r[i], g[i], b[i], ww[i]],[0,0,0,0],[0,0,0,0]]}
